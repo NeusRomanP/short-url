@@ -18,8 +18,24 @@
     <body>
         <form action="/store-url" method="post">
             @csrf
-            <input type="url" name="url" id="url" required>
-            <input type="text" name="slug" id="slug" max="10">
+            <div>
+                <label for="url">URL:*</label>
+                <input type="url" name="url" id="url" value="{{ old('url') }}" required>
+                @if ($errors->has('url'))
+                    <div class="text-red-600 mt-1">
+                        {{ $errors->first('url') }}
+                    </div>
+                @endif
+            </div>
+            <div>
+                <label for="slug">Slug:</label>
+                <input type="text" name="slug" id="slug" max="10" value="{{ old('slug') }}">
+                @if ($errors->has('slug'))
+                    <div class="text-red-600 mt-1">
+                        {{ $errors->first('slug') }}
+                    </div>
+                @endif
+            </div>
             <button type="submit">Create</button>
         </form>
         @if (session('success'))

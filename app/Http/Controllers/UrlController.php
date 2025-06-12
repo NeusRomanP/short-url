@@ -17,13 +17,14 @@ class UrlController extends Controller
         $request->validate(
             [
                 'url' => 'required|active_url|max:255',
-                'slug' => 'unique:urls|regex:/^[a-zA-Z0-9-_]+$/'
+                'slug' => 'nullable|unique:urls|regex:/^[a-zA-Z0-9-_]+$/'
             ],
             [
                 'url.required' => 'Url is required.',
                 'url.active_url' => 'Url is not valid.',
                 'url.max' => 'Url is too long.',
-                'slug.unique' => 'This slug already exists'
+                'slug.unique' => 'This slug already exists',
+                'slug.regex' => 'Slug can only contain alphanumeric characters, - and _'
             ]
         );
         $existingUrl = Url::where('url', $request->url)->first();
