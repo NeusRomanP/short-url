@@ -17,7 +17,7 @@ class UrlController extends Controller
         $request->validate(
             [
                 'url' => 'required|active_url|max:255',
-                'slug' => 'unique:urls'
+                'slug' => 'unique:urls|regex:/^[a-zA-Z0-9-_]+$/'
             ],
             [
                 'url.required' => 'Url is required.',
