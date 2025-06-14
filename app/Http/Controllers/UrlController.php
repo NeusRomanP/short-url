@@ -17,18 +17,20 @@ class UrlController extends Controller
         $request->validate(
             [
                 'url' => 'required|active_url|max:255',
-                'slug' => 'nullable|unique:urls|regex:/^[a-zA-Z0-9-_]+$/'
+                'slug' => 'nullable|unique:urls|max:16|regex:/^[a-zA-Z0-9-_]+$/'
             ],
             [
                 'url.required' => 'Url is required.',
                 'url.active_url' => 'Url is not valid.',
                 'url.max' => 'Url is too long.',
                 'slug.unique' => 'This slug already exists',
+                'slug.max' => 'Slug can\'t be longer than 16 characters',
                 'slug.regex' => 'Slug can only contain alphanumeric characters, - and _'
             ]
         );
         $existingUrl = Url::where('url', $request->url)->first();
         if ($existingUrl) {
+            // send url already exists message to display before url
             return back()->with('success', url('/') . '/' . strtolower($existingUrl->slug));
         }
 
