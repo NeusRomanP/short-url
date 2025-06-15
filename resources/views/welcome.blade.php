@@ -16,6 +16,9 @@
         @endif
     </head>
     <body class="h-[100vh] flex flex-col justify-center bg-gradient-to-br from-indigo-100 to-emerald-100">
+        <h1 class="mx-auto text-3xl text-center max-w-[800px] w-[90%] mb-4">
+            URL shortener
+        </h1>
         <form action="/store-url" method="post"
               class="w-[90%] max-w-[600px] mx-auto flex flex-col gap-4">
             @csrf
