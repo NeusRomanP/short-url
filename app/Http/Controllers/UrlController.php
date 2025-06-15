@@ -31,7 +31,12 @@ class UrlController extends Controller
         $existingUrl = Url::where('url', $request->url)->first();
         if ($existingUrl) {
             // send url already exists message to display before url
-            return back()->with('success', url('/') . '/' . strtolower($existingUrl->slug));
+            return back()->with(
+                [
+                    'success' => url('/') . '/' . strtolower($existingUrl->slug),
+                    'exists_message' => 'This url already exists'
+                ]
+            );
         }
 
         $url = new Url();

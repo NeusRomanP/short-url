@@ -15,9 +15,9 @@
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
     </head>
-    <body class="h-[100vh] flex flex-col justify-center">
+    <body class="h-[100vh] flex flex-col justify-center bg-gradient-to-br from-indigo-100 to-emerald-100">
         <form action="/store-url" method="post"
-              class="w-[90%] max-w-[600px] mx-auto">
+              class="w-[90%] max-w-[600px] mx-auto flex flex-col gap-4">
             @csrf
             <div>
                 <label for="url" class="block mb-2 text-sm font-medium text-gray-900">
@@ -49,9 +49,15 @@
             </button>
         </form>
         @if (session('success'))
-            <a href="{{ session('success') }}">
-                {{ session('success') }}
-            </a>
+            <div class="mx-auto text-center">
+                @if (session('exists_message'))
+                    <span>{{ session('exists_message') }}: </span>
+                @endif
+                <a href="{{ session('success') }}" target="_blank"
+                   class="w-[90%] max-w-[600px] text-indigo-700 hover:text-indigo-950 font-bold">
+                    {{ session('success') }}
+                </a>
+            </div>
         @endif
     </body>
 </html>
