@@ -33,7 +33,7 @@ class UrlController extends Controller
             // send url already exists message to display before url
             return back()->with(
                 [
-                    'success' => url('/') . '/' . strtolower($existingUrl->slug),
+                    'success' => url('/') . '/s/' . strtolower($existingUrl->slug),
                     'exists_message' => 'This url already exists'
                 ]
             );
@@ -48,7 +48,7 @@ class UrlController extends Controller
 
         $url->save();
 
-        return back()->with('success', url('/') . '/' . $slug);
+        return back()->with('success', url('/') . '/s/' . $slug);
     }
 
     function generateSlug() {
@@ -66,6 +66,10 @@ class UrlController extends Controller
     {
         $url = Url::where('slug', $slug)->first();
 
+        if (empty($url->url)) {
+            abort(404);
+        }
+        
         return redirect($url->url);
     }
 }

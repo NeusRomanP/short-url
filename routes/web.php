@@ -7,4 +7,4 @@ Route::get('/', function () {
 });
 
 Route::post('store-url', [App\Http\Controllers\UrlController::class, 'store']);
-Route::get('/{slug}', [App\Http\Controllers\UrlController::class, 'goToRoute']);
+Route::get('/s/{slug}', [App\Http\Controllers\UrlController::class, 'goToRoute']);
